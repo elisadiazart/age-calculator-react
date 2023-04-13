@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 const StyledAgeCalculator = styled.div`
-	width: 800px;
-	height: 700px;
+	width: 60%;
+	min-width: 680px;
 	background-color: white;
 	margin: auto;
 	margin-top: 6rem;
+	padding-bottom: 4rem;
 	border-radius: 24px 24px 200px 24px;
 	position: relative;
 `;

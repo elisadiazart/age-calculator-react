@@ -22,6 +22,10 @@ const StyledInput = styled.input`
 	font-family: 'Poppins', sans-serif;
 	font-weight: 700;
 	color: black;
+
+	&:focus {
+		outline: 2px solid #854dff;
+	}
 `;
 
 export { StyledDiv, StyledInput };

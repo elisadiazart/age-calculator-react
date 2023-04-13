@@ -1,7 +1,7 @@
 import { StyledIcon, StyledDiv } from "./styles"
 
-const Arrow = () => {
-    return <StyledDiv>
+const Arrow = ({HandleClick}) => {
+    return <StyledDiv onClick={() =>{HandleClick()}}>
         <StyledIcon src="/icon-arrow.svg" alt="" />
     </StyledDiv>
 }
