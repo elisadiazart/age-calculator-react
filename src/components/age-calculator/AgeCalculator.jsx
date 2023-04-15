@@ -9,8 +9,11 @@ const AgeCalculator = (day,month,year) => {
         month:0,
         year:0,
     })
-
-    console.log(age);
+    const [ageToPrint, setAgeToPrint] = useState({
+        days:'--',
+        months:'--',
+        years:'--',
+    })
 
     return <StyledAgeCalculator>
         <StyledInputs>
@@ -18,14 +21,22 @@ const AgeCalculator = (day,month,year) => {
             <input id='month' title='month' placeholder='MM' onChange={(e)=> setAge({...age, month: e.target.value})}/>
             <input id='year' title='year' placeholder='YYYY' onChange={(e)=> setAge({...age, year: e.target.value})}/>
         </StyledInputs>
-        <Arrow HandleClick={() => diferenceBetweenDates(age.day, age.month, age.year)}/>
+        <Arrow handleClick={() => dateToPrint(age, setAgeToPrint)}/>
         <div>
-            <AgeResult number='--' data=' years'/>
-            <AgeResult number='--' data=' months'/>
-            <AgeResult number='--' data=' days'/>
+            <AgeResult number={ageToPrint.years} data=' years'/>
+            <AgeResult number={ageToPrint.months} data=' months'/>
+            <AgeResult number={ageToPrint.days} data=' days'/>
         </div>
     </StyledAgeCalculator>
 }
+
+    const dateToPrint = (age, setAgeToPrint) => {
+        const birthday = new Date(`${age.month}/${age.day}/${age.year}`)
+        const now = new Date()
+        const totalDays = diferenceBetweenDates(now,birthday)
+        const totalTime = convertDays(totalDays)
+        setAgeToPrint(totalTime)
+    }
 
     const convertDays = (days) => {
         const years = Math.floor(days / 365);
@@ -44,14 +55,12 @@ const AgeCalculator = (day,month,year) => {
         return {years, months, days};
     }
     
-    const diferenceBetweenDates = (days, months, years) => {
-        const birthday = new Date(`${days}/${months}/${years}`)
-        const now = new Date();
+    const diferenceBetweenDates = (now, birthday) => {
         const milisecondsPerDay = 86400000; // Número de milisegundos en un día
         const milisecondsBetweenDays = now - birthday // Calcula la diferencia de tiempo en milisegundos
         const diferenceInDays = Math.floor(milisecondsBetweenDays / milisecondsPerDay); // Convierte la diferencia en días
         
-        convertDays(diferenceInDays)
+        return diferenceInDays
     }
     
  
