@@ -1,19 +1,21 @@
-import { useState } from "react"
+import { dateToPrint} from "../../hooks/useAgeData"
 import AgeResult from "../age-result/AgeResult"
 import Arrow from "../arrow/Arrow"
 import { StyledAgeCalculator, StyledInputs, StyledInput, StyledDiv } from "./styles"
+import { useState } from 'react';
 
-const AgeCalculator = (day,month,year) => {
+
+const AgeCalculator = () => {
     const [age, setAge] = useState({
-        day:0,
-        month:0,
-        year:0,
-    })
+		day: 0,
+		month: 0,
+		year: 0
+	});
     const [ageToPrint, setAgeToPrint] = useState({
-        days:'--',
-        months:'--',
-        years:'--',
-    })
+		days: '--',
+		months: '--',
+		years: '--'
+	});
 
     return <StyledAgeCalculator>
         <StyledInputs>
@@ -39,38 +41,7 @@ const AgeCalculator = (day,month,year) => {
     </StyledAgeCalculator>
 }
 
-    const dateToPrint = (age, setAgeToPrint) => {
-        const birthday = new Date(`${age.month}/${age.day}/${age.year}`)
-        const now = new Date()
-        const totalDays = diferenceBetweenDates(now,birthday)
-        const totalTime = convertDays(totalDays)
-        setAgeToPrint(totalTime)
-    }
-
-    const convertDays = (days) => {
-        const years = Math.floor(days / 365);
-        days = days % 365;
-        let months = Math.floor(days / 30);
-        days = days % 30;
-        
-        const dateTemp = new Date();
-        dateTemp.setDate(dateTemp.getDate() + days);
-        const lastDayOfMonth = new Date(dateTemp.getFullYear(), dateTemp.getMonth() + 1, 0).getDate();
-        if (days > lastDayOfMonth) {
-        days -= lastDayOfMonth;
-        months++;
-        }
-        
-        return {years, months, days};
-    }
     
-    const diferenceBetweenDates = (now, birthday) => {
-        const milisecondsPerDay = 86400000; // Número de milisegundos en un día
-        const milisecondsBetweenDays = now - birthday // Calcula la diferencia de tiempo en milisegundos
-        const diferenceInDays = Math.floor(milisecondsBetweenDays / milisecondsPerDay); // Convierte la diferencia en días
-        
-        return diferenceInDays
-    }
     
  
 
