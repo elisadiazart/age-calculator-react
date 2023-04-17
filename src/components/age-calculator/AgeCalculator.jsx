@@ -1,7 +1,7 @@
 import { useState } from "react"
 import AgeResult from "../age-result/AgeResult"
 import Arrow from "../arrow/Arrow"
-import { StyledAgeCalculator, StyledInputs } from "./styles"
+import { StyledAgeCalculator, StyledInputs, StyledInput, StyledDiv } from "./styles"
 
 const AgeCalculator = (day,month,year) => {
     const [age, setAge] = useState({
@@ -17,9 +17,18 @@ const AgeCalculator = (day,month,year) => {
 
     return <StyledAgeCalculator>
         <StyledInputs>
-            <input id='day' title='day' placeholder='DD' onChange={(e)=> setAge({...age, day: e.target.value})} />
-            <input id='month' title='month' placeholder='MM' onChange={(e)=> setAge({...age, month: e.target.value})}/>
-            <input id='year' title='year' placeholder='YYYY' onChange={(e)=> setAge({...age, year: e.target.value})}/>
+            <StyledDiv>
+                <label htmlFor='day'>Day</label>
+                <StyledInput id='day' title='day' placeholder='DD' onChange={(e)=> setAge({...age, day: e.target.value})} />
+            </StyledDiv>
+            <StyledDiv>
+                <label htmlFor='month'>month</label>
+                <StyledInput id='month' title='month' placeholder='MM' onChange={(e)=> setAge({...age, month: e.target.value})}/>
+            </StyledDiv>
+            <StyledDiv>
+                <label htmlFor='years'>year</label>
+                <StyledInput id='year' title='year' placeholder='YYYY' onChange={(e)=> setAge({...age, year: e.target.value})}/>
+            </StyledDiv>
         </StyledInputs>
         <Arrow handleClick={() => dateToPrint(age, setAgeToPrint)}/>
         <div>
